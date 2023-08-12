@@ -14,16 +14,13 @@ const useFetch = (endpoint) => {
     useEffect(() => {
         try {
             fetchData();
+            setLoading(false);
         } catch (error) {
             setError(error);
         }
-        setLoading(false);
-    });
+    }, [endpoint]);
 
-    return {
-        data,
-        error
-    }
+    return data;
 };
 
 export default useFetch;
