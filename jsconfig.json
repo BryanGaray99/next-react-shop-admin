@@ -14,6 +14,12 @@
       "@layout/*": [
         "layout/*"
       ],
+      "@services/*": [
+        "services/*"
+      ],
+      "@hooks/*": [
+        "hooks/*"
+      ],
     }
   }
 }
