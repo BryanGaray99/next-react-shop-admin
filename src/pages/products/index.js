@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
+import { PlusIcon } from '@heroicons/react/solid';
+import Modal from '@common/Modal';
 import useFetch from '@hooks/useFetch';
 import endPoints from '@services/API';
 import Paginate from '@components/Paginate';
+import FormProduct from '@components/FormProduct';
 
 const PRODUCT_LIMIT = 10;
 
 export default function Products() {
+  const [openModal, setOpenModal] = useState(false);
+  // const [products, setProducts] = useState([]);
   const [offsetProducts, setOffsetProducts] = useState(0);
   const totalProducts = useFetch(endPoints.products.getProducts(0, 0)).length;
   const products = useFetch(endPoints.products.getProducts(PRODUCT_LIMIT, offsetProducts), offsetProducts);
@@ -15,8 +20,22 @@ export default function Products() {
     <>
       <div className="flex flex-col">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="flex items-center justify-between mt-2 mb-2 mr-7 ml-4">
+            <div className="flex-1 min-w-0">
+              <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">List of Products</h2>
+            </div>
+            <span className="sm:ml-3">
+              <button
+                type="button"
+                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                onClick={() => setOpenModal(true)}
+              >
+                <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+                Add Product
+              </button>
+            </span>
+          </div>
           {totalProducts > 0 && <Paginate totalItems={totalProducts} itemsPerPage={PRODUCT_LIMIT} setOffset={setOffsetProducts} neighbours={3}></Paginate>}
-
           <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
             <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
               <table className="min-w-full divide-y divide-gray-200">
@@ -80,6 +99,9 @@ export default function Products() {
           </div>
         </div>
       </div>
+      <Modal open={openModal} setOpen={setOpenModal}>
+        <FormProduct />
+      </Modal>
     </>
   );
 }

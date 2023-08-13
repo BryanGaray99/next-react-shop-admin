@@ -16,7 +16,7 @@ export const Chart = ({ chartData }) => {
             plugins: {
               title: {
                 display: true,
-                text: 'Category',
+                text: 'Products by Category',
                 fontSize: 20,
               },
               legend: {
