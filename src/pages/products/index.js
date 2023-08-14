@@ -21,7 +21,7 @@ export default function Products() {
 
   useEffect(() => {
     async function getProducts() {
-      const responseProducts = await axios.get(endPoints.products.getProducts(PRODUCT_LIMIT, offsetProducts));
+      const responseProducts = await axios.get(endPoints.products.getProducts(PRODUCT_LIMIT, offsetProducts), offsetProducts);
       const responseTotalProducts = await axios.get(endPoints.products.getProducts(0, 0));
       setProducts(responseProducts.data);
       setTotalProducts(responseTotalProducts.data.length);
@@ -32,7 +32,7 @@ export default function Products() {
     } catch (error) {
       console.log(error);
     }
-  }, [alert]);
+  }, [alert, offsetProducts]);
 
   // console.log(products);
 
