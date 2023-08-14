@@ -1,18 +1,15 @@
 /* This example requires Tailwind CSS v2.0+ */
+import Image from 'next/image';
 import { Fragment } from 'react';
 import { useAuth } from '@hooks/useAuth';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
+import { LoginIcon, LogoutIcon } from '@heroicons/react/solid';
+import logoWhite from '@assets/astro-place-white.png';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', current: false },
   { name: 'Productos', href: '/products', current: false },
-  { name: 'Ventas', href: '#', current: false },
-];
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
 ];
 
 function classNames(...classes) {
@@ -24,18 +21,26 @@ export default function Header() {
   const userData = {
     name: auth?.user?.name,
     email: auth?.user?.email,
-    imageUrl: `https://ui-avatars.com/api/?name=${auth?.user?.name}`
+    imageUrl: auth.user ? `https://ui-avatars.com/api/?name=${auth?.user?.name}` : `https://ui-avatars.com/api/?name=`,
   };
   return (
     <>
       <Disclosure as="nav" className="bg-gray-800">
         {({ open }) => (
           <>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex items-center justify-between h-16">
                 <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <img className="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow" />
+                  <div className="flex-shrink-0 cursor-pointer">
+                    <Image
+                      src={logoWhite} // Route of the image file
+                      width="60px"
+                      height="50px"
+                      onClick={() => {
+                        window.location.href = '/';
+                      }}
+                      alt="Image"
+                    />
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
@@ -80,15 +85,17 @@ export default function Header() {
                         leaveTo="transform opacity-0 scale-95"
                       >
                         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          {userNavigation.map((item) => (
-                            <Menu.Item key={item.name}>
-                              {({ active }) => (
-                                <a href={item.href} className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}>
-                                  {item.name}
-                                </a>
-                              )}
-                            </Menu.Item>
-                          ))}
+                          {auth.user ? (
+                            <button onClick={() => auth.logOut()} className="flex justify-between px-4 py-2 text-md text-gray-700 w-full">
+                              <span className="w-full font-semibold">Cerrar sesión</span>
+                              <LogoutIcon className="h-6 w-6" aria-hidden="true" />
+                            </button>
+                          ) : (
+                            <button onClick={() => window.location.href = '/login'} className="flex justify-between px-4 py-2 text-md text-gray-700 w-full">
+                              <LoginIcon className="h-6 w-6" aria-hidden="true" />
+                              <span className="w-full font-semibold">Iniciar sesión</span>
+                            </button>
+                          )}
                         </Menu.Items>
                       </Transition>
                     </Menu>
@@ -136,11 +143,10 @@ export default function Header() {
                   </button>
                 </div>
                 <div className="mt-3 px-2 space-y-1">
-                  {userNavigation.map((item) => (
-                    <Disclosure.Button key={item.name} as="a" href={item.href} className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">
-                      {item.name}
-                    </Disclosure.Button>
-                  ))}
+                  <button onClick={() => auth.logOut()} className="flex justify-between px-4 py-2 text-md text-gray-700 w-1/4">
+                    <span className="w-full text-white">Cerrar sesión</span>
+                    <LogoutIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                  </button>
                 </div>
               </div>
             </Disclosure.Panel>

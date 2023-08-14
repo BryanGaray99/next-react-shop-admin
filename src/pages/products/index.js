@@ -59,7 +59,7 @@ export default function Products() {
   return (
     <>
       <Alert alert={alert} handleClose={toggleAlert} />
-      <div className="flex flex-col">
+      <div className="flex flex-col m-10">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="flex items-center justify-between mt-2 mb-2 mr-7 ml-4">
             <div className="flex-1 min-w-0">
