@@ -8,6 +8,7 @@ import FormProduct from '@components/FormProduct';
 import useAlert from '@hooks/useAlert';
 import Alert from '@common/Alert';
 import axios from 'axios';
+import Link from 'next/link';
 
 const PRODUCT_LIMIT = 10;
 
@@ -24,7 +25,7 @@ export default function Products() {
       const responseTotalProducts = await axios.get(endPoints.products.getProducts(0, 0));
       setProducts(responseProducts.data);
       setTotalProducts(responseTotalProducts.data.length);
-      console.log(responseTotalProducts.data.length);
+      // console.log(responseTotalProducts.data.length);
     }
     try {
       getProducts();
@@ -122,9 +123,9 @@ export default function Products() {
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-500 whitespace-normal break-words">{product.description}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="/edit" className="text-indigo-600 hover:text-indigo-900">
+                        <Link href={`/products/edit/${product.id}`} className="text-indigo-600 hover:text-indigo-900">
                           Edit
-                        </a>
+                        </Link>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <button onClick={() => handleDelete(product.id)} className="text-indigo-600 hover:text-indigo-900" aria-hidden="true">
