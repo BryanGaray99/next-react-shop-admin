@@ -1,9 +1,11 @@
 import { useRef } from 'react';
+import { ValidationSchema } from '@common/ValidationSchema';
+import { addProduct } from '@services/API/products';
 
-export default function FormProduct() {
+export default function FormProduct({ setOpenModal, setAlert }) {
   const formRef = useRef(null);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(formRef.current);
     const data = {
@@ -13,7 +15,38 @@ export default function FormProduct() {
       categoryId: parseInt(formData.get('category')),
       images: [formData.get('images').name],
     };
-    console.log(data);
+
+    const validatedData = await ValidationSchema.validate(data).catch(function (err) {
+      let errorValidate = err.errors;
+      let errorMessage = '';
+      for (const [key, value] of Object.entries(errorValidate)) {
+        // console.log(value);
+        errorMessage = errorMessage.concat(value);
+      }
+      alert(`Errors in the form: ${errorMessage}`);
+    });
+    // console.log({ validatedData });
+
+    addProduct(validatedData)
+      .then(() => {
+        setAlert({
+          active: true,
+          message: 'Product added successfully.',
+          type: 'success',
+          autoClose: true,
+        });
+        setOpenModal(false);
+      })
+      .catch((error) => {
+        setAlert({
+          active: true,
+          message: 'Product was not added, please try again.',
+          type: 'error',
+          autoClose: true,
+        });
+        setOpenModal(false);
+        // console.log(response);
+      });
   };
 
   return (

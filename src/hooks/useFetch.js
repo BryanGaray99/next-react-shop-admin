@@ -5,22 +5,23 @@ const useFetch = (endpoint) => {
     const [data, setData] = useState([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
-
+  
     async function fetchData() {
+      try {
         const response = await axios.get(endpoint);
         setData(response.data);
-    };
-
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  
     useEffect(() => {
-        try {
-            fetchData();
-            setLoading(false);
-        } catch (error) {
-            setError(error);
-        }
-    }, [endpoint]);
-
+      fetchData();
+    }, []);
+  
     return data;
-};
+  };
 
 export default useFetch;

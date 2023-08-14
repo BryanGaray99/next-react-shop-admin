@@ -1,23 +1,63 @@
-import { Fragment, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PlusIcon } from '@heroicons/react/solid';
+import { deleteProduct } from '@services/API/products';
 import Modal from '@common/Modal';
-import useFetch from '@hooks/useFetch';
 import endPoints from '@services/API';
 import Paginate from '@components/Paginate';
 import FormProduct from '@components/FormProduct';
+import useAlert from '@hooks/useAlert';
+import Alert from '@common/Alert';
+import axios from 'axios';
 
 const PRODUCT_LIMIT = 10;
 
 export default function Products() {
   const [openModal, setOpenModal] = useState(false);
-  // const [products, setProducts] = useState([]);
   const [offsetProducts, setOffsetProducts] = useState(0);
-  const totalProducts = useFetch(endPoints.products.getProducts(0, 0)).length;
-  const products = useFetch(endPoints.products.getProducts(PRODUCT_LIMIT, offsetProducts), offsetProducts);
+  const { alert, setAlert, toggleAlert } = useAlert();
+  const [products, setProducts] = useState([]);
+  const [totalProducts, setTotalProducts] = useState([]);
+
+  useEffect(() => {
+    async function getProducts() {
+      const responseProducts = await axios.get(endPoints.products.getProducts(PRODUCT_LIMIT, offsetProducts));
+      const responseTotalProducts = await axios.get(endPoints.products.getProducts(0, 0));
+      setProducts(responseProducts.data);
+      setTotalProducts(responseTotalProducts.data.length);
+      console.log(responseTotalProducts.data.length);
+    }
+    try {
+      getProducts();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [alert]);
+
   // console.log(products);
+
+  const handleDelete = async (id) => {
+    deleteProduct(id)
+      .then(() => {
+        setAlert({
+          active: true,
+          message: 'Product deleted successfully!',
+          type: 'success',
+          autoClose: true,
+        });
+      })
+      .catch((error) => {
+        setAlert({
+          active: true,
+          message: `Error deleting product: ${error}`,
+          type: 'error',
+          autoClose: true,
+        });
+      });
+  };
 
   return (
     <>
+      <Alert alert={alert} handleClose={toggleAlert} />
       <div className="flex flex-col">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="flex items-center justify-between mt-2 mb-2 mr-7 ml-4">
@@ -87,9 +127,9 @@ export default function Products() {
                         </a>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="/delete" className="text-indigo-600 hover:text-indigo-900">
+                        <button onClick={() => handleDelete(product.id)} className="text-indigo-600 hover:text-indigo-900" aria-hidden="true">
                           Delete
-                        </a>
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -100,7 +140,7 @@ export default function Products() {
         </div>
       </div>
       <Modal open={openModal} setOpen={setOpenModal}>
-        <FormProduct />
+        <FormProduct setOpenModal={setOpenModal} setAlert={setAlert} />
       </Modal>
     </>
   );
