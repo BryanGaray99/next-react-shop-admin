@@ -25,7 +25,7 @@ Link: <a href="https://astro-place-admin-jdxu7htd0-bryangaray99.vercel.app/" tar
 This project is released under the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Developer
-Bryan Garay
+Bryan Enrique Garay Benavidez
 </br>Contact: bryangarayacademico@gmail.com
 
 ## Project created with create Next.js
