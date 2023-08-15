@@ -21,9 +21,9 @@ export default function Header() {
   const userData = {
     name: auth?.user?.name,
     email: auth?.user?.email,
-    imageUrl: `https://ui-avatars.com/api/?name=${auth?.user?.name}`,
+    imageUrl: auth.user ? `https://ui-avatars.com/api/?name=${auth?.user?.name}` : `https://ui-avatars.com/api/?name=`,
   };
-  console.log(userData);
+  // console.log(userData);
   return (
     <>
       <Disclosure as="nav" className="bg-gray-800">
@@ -73,7 +73,7 @@ export default function Header() {
                       <div>
                         <Menu.Button className="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                           <span className="sr-only">Open user menu</span>
-                          <img className="h-8 w-8 rounded-full" src={userData.imageUrl} alt="" />
+                          <Image src={userData.imageUrl} width="32px" height="32px" alt="" className='rounded-full' />
                         </Menu.Button>
                       </div>
                       <Transition
@@ -129,7 +129,7 @@ export default function Header() {
               <div className="pt-4 pb-3 border-t border-gray-700">
                 <div className="flex items-center px-5">
                   <div className="flex-shrink-0">
-                    <img className="h-10 w-10 rounded-full" src={userData.imageUrl} alt="" />
+                    <Image src={userData.imageUrl} width="40px" height="40px" alt="" className='rounded-full' />
                   </div>
                   <div className="ml-3">
                     <div className="text-base font-medium leading-none text-white">{userData.name}</div>
@@ -145,14 +145,14 @@ export default function Header() {
                 </div>
                 <div className="mt-3 px-2 space-y-1">
                   {auth.user ? (
-                    <button onClick={() => auth.logOut()} className="flex justify-between px-4 py-2 text-md text-gray-700 w-full">
-                      <span className="w-full font-semibold">Cerrar sesión</span>
-                      <LogoutIcon className="h-6 w-6" aria-hidden="true" />
+                    <button onClick={() => auth.logOut()} className="flex justify-between px-4 py-2 text-md text-gray-700 w-2/5">
+                      <span className="w-full font-semibold text-white">Cerrar sesión</span>
+                      <LogoutIcon className="h-6 w-6 text-white" aria-hidden="true" />
                     </button>
                   ) : (
-                    <button onClick={() => (window.location.href = '/login')} className="flex justify-between px-4 py-2 text-md text-gray-700 w-full">
-                      <LoginIcon className="h-6 w-6" aria-hidden="true" />
-                      <span className="w-full font-semibold">Iniciar sesión</span>
+                    <button onClick={() => (window.location.href = '/login')} className="flex justify-between px-4 py-2 text-md text-gray-700 w-2/5">
+                      <LoginIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                      <span className="w-full font-semibold text-white">Iniciar sesión</span>
                     </button>
                   )}
                 </div>
