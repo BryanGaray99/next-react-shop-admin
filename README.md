@@ -9,7 +9,7 @@ Here is the final project of the Profesional Course of Next.js from Platzi. My g
 The deploy was made with Vercel by connecting the Github repository to the Vercel account. 
 
 ## Visit the website
-Link: <a href="https://astro-place-admin-jdxu7htd0-bryangaray99.vercel.app/" target="_blank" rel="noopener noreferrer">Click here!</a>
+Link: <a href="https://astro-place-admin-bg.vercel.app/" target="_blank" rel="noopener noreferrer">Click here!</a>
 
 <p align="center">
   <img src="https://i.ibb.co/NKPHQL3/desktop-view.png" alt="Preview.png">
