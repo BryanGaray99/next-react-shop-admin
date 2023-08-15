@@ -17,7 +17,7 @@ export default function Home() {
       <div className="hidden md:flex flex-col justify-center align-middle h-screen md:w-1/2 bg-black text-white py-16 px-8 text-center">
         <h2 className="relative text-2xl font-bold mb-4">Astro Place</h2>
         <p className="relative text-xl">
-          Here is the final project of the "Profesional Course of Next.js" from Platzi. My goal with the course was to improve my skills with the javascript ecosystem, exploring profesional ways of
+          Here is the final project of the Profesional Course of Next.js from Platzi. My goal with the course was to improve my skills with the javascript ecosystem, exploring profesional ways of
           working with Next.js framework.
         </p>
       </div>
@@ -60,8 +60,8 @@ export default function Home() {
           <div className="bg-white p-4 mx-2 md:w-1/2 max-w-lg">
             <h2 className="text-3xl font-bold mb-4 text-center">Astro Place</h2>
             <p className="text-lg text-center">
-              Here is the final project of the "Profesional Course of Next.js" from Platzi. My goal with the course was to improve my skills with the javascript ecosystem, exploring profesional ways
-              of working with Next.js framework.
+              Here is the final project of the Profesional Course of Next.js from Platzi. My goal with the course was to improve my skills with the javascript ecosystem, exploring profesional ways of
+              working with Next.js framework.
             </p>
             <div className="flex justify-center">
               <button className="bg-black text-white px-4 py-2 rounded-full mt-4 mx-auto" onClick={closeModal}>

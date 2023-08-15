@@ -1,10 +1,6 @@
-import { useState } from 'react';
 import useFetch from '@hooks/useFetch';
 import endPoints from '@services/API';
-import Paginate from '@components/Paginate';
 import { Chart } from '@common/Chart';
-
-const PRODUCT_LIMIT = 10;
 
 export default function Dashboard() {
   const products = useFetch(endPoints.products.getProducts(0, 0));

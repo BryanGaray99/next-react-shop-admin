@@ -15,7 +15,7 @@ const addProduct = async (body) => {
 const deleteProduct = async (id) => {
   const response = await axios.delete(endPoints.products.deleteProducts(id));
   return response.data;
-}
+};
 
 const upadteProduct = async (id, body) => {
   const config = {
