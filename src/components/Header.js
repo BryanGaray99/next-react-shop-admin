@@ -21,8 +21,9 @@ export default function Header() {
   const userData = {
     name: auth?.user?.name,
     email: auth?.user?.email,
-    imageUrl: auth.user ? `https://ui-avatars.com/api/?name=${auth?.user?.name}` : `https://ui-avatars.com/api/?name=`,
+    imageUrl: `https://ui-avatars.com/api/?name=${auth?.user?.name}`,
   };
+  console.log(userData);
   return (
     <>
       <Disclosure as="nav" className="bg-gray-800">
@@ -33,7 +34,7 @@ export default function Header() {
                 <div className="flex items-center">
                   <div className="flex-shrink-0 cursor-pointer">
                     <Image
-                      src={logoWhite} // Route of the image file
+                      src={logoWhite}
                       width="60px"
                       height="50px"
                       onClick={() => {
@@ -91,7 +92,7 @@ export default function Header() {
                               <LogoutIcon className="h-6 w-6" aria-hidden="true" />
                             </button>
                           ) : (
-                            <button onClick={() => window.location.href = '/login'} className="flex justify-between px-4 py-2 text-md text-gray-700 w-full">
+                            <button onClick={() => (window.location.href = '/login')} className="flex justify-between px-4 py-2 text-md text-gray-700 w-full">
                               <LoginIcon className="h-6 w-6" aria-hidden="true" />
                               <span className="w-full font-semibold">Iniciar sesión</span>
                             </button>
@@ -143,10 +144,17 @@ export default function Header() {
                   </button>
                 </div>
                 <div className="mt-3 px-2 space-y-1">
-                  <button onClick={() => auth.logOut()} className="flex justify-between px-4 py-2 text-md text-gray-700 w-1/4">
-                    <span className="w-full text-white">Cerrar sesión</span>
-                    <LogoutIcon className="h-6 w-6 text-white" aria-hidden="true" />
-                  </button>
+                  {auth.user ? (
+                    <button onClick={() => auth.logOut()} className="flex justify-between px-4 py-2 text-md text-gray-700 w-full">
+                      <span className="w-full font-semibold">Cerrar sesión</span>
+                      <LogoutIcon className="h-6 w-6" aria-hidden="true" />
+                    </button>
+                  ) : (
+                    <button onClick={() => (window.location.href = '/login')} className="flex justify-between px-4 py-2 text-md text-gray-700 w-full">
+                      <LoginIcon className="h-6 w-6" aria-hidden="true" />
+                      <span className="w-full font-semibold">Iniciar sesión</span>
+                    </button>
+                  )}
                 </div>
               </div>
             </Disclosure.Panel>

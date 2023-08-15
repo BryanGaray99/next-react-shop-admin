@@ -19,7 +19,10 @@ export const useAuth = () => {
 };
 
 function useProviderAuth() {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(() => {
+        const storedUser = Cookie.get('user');
+        return storedUser ? JSON.parse(storedUser) : null;
+    });
     const [error, setError]=useState();
     
     const signIn = async (email, password) => {
@@ -38,11 +41,13 @@ function useProviderAuth() {
             const { data: user } = await axios.get(endPoints.auth.profile);
             // console.log(user);
             setUser(user);
+            Cookie.set('user', JSON.stringify(user), { expires: 5 });
         }
     };
 
     const logOut = () => {
         setUser(null);
+        Cookie.remove('user');
         Cookie.remove('access_token');
         delete axios.defaults.headers.Authorization;
         window.location.href= '/login'
