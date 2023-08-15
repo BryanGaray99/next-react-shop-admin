@@ -73,7 +73,7 @@ export default function Header() {
                       <div>
                         <Menu.Button className="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                           <span className="sr-only">Open user menu</span>
-                          <Image src={userData.imageUrl} width="32px" height="32px" alt="" className='rounded-full' />
+                          <Image src={userData.imageUrl} width="32px" height="32px" alt="" className="rounded-full" />
                         </Menu.Button>
                       </div>
                       <Transition
@@ -129,7 +129,7 @@ export default function Header() {
               <div className="pt-4 pb-3 border-t border-gray-700">
                 <div className="flex items-center px-5">
                   <div className="flex-shrink-0">
-                    <Image src={userData.imageUrl} width="40px" height="40px" alt="" className='rounded-full' />
+                    <Image src={userData.imageUrl} width="40px" height="40px" alt="" className="rounded-full" />
                   </div>
                   <div className="ml-3">
                     <div className="text-base font-medium leading-none text-white">{userData.name}</div>

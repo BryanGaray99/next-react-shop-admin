@@ -9,7 +9,6 @@ import useAlert from '@hooks/useAlert';
 import Alert from '@common/Alert';
 import axios from 'axios';
 import Link from 'next/link';
-import Image from 'next/image';
 
 const PRODUCT_LIMIT = 10;
 

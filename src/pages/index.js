@@ -45,28 +45,13 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 w-full bg-gray-200 py-4 px-8 flex justify-center items-center">
           <span className="text-gray-800 mr-2">By Bryan Garay</span>
           <a href="https://github.com/BryanGaray99" target="_blank" rel="noopener noreferrer" className="mr-2">
-            <Image
-              src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" 
-              width="24px"
-              height="24px"
-              alt="GitHub Logo"
-            />
+            <Image src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" width="24px" height="24px" alt="GitHub Logo" />
           </a>
           <a href="https://linkedin.com/in/bg99astro/" target="_blank" rel="noopener noreferrer" className="mr-2">
-            <Image
-              src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
-              width="24px"
-              height="24px"
-              alt="LinkedIn Logo"
-            />
+            <Image src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" width="24px" height="24px" alt="LinkedIn Logo" />
           </a>
           <a href="https://www.instagram.com/astronomy_student/?igshid=MjEwN2IyYWYwYw%3D%3D" target="_blank" rel="noopener noreferrer">
-            <Image
-              src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg"
-              width="24px"
-              height="24px"
-              alt="Instagram Logo"
-            />
+            <Image src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" width="24px" height="24px" alt="Instagram Logo" />
           </a>
         </div>
       </div>
