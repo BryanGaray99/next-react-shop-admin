@@ -29,7 +29,7 @@ export default function Edit() {
   return (
     <>
       <Alert alert={alert} handleClose={toggleAlert} />
-      <div className="flex-1 min-w-0">
+      <div className="flex-1 min-w-0 m-10">
         <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Edit a product</h2>
       </div>
       <FormProduct setAlert={setAlert} product={product} />

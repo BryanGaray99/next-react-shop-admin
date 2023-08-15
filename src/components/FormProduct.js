@@ -76,7 +76,7 @@ export default function FormProduct({ setOpenModal, setAlert, product }) {
 
   return (
     <form ref={formRef} onSubmit={handleSubmit}>
-      <div className="overflow-hidden">
+      <div className="overflow-hidden m-10">
         <div className="px-4 py-5 bg-white sm:p-6">
           <div className="grid grid-cols-6 gap-6">
             <div className="col-span-6 sm:col-span-3">
@@ -138,7 +138,6 @@ export default function FormProduct({ setOpenModal, setAlert, product }) {
             <div className="col-span-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  <input type="text" />
                   Cover photo
                 </label>
                 <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
